@@ -267,10 +267,12 @@ int zcl_comm_response( const wpan_envelope_t FAR *envelope,
 {
 	const zcl_header_nomfg_t FAR *zcl;
 	wpan_envelope_t reply_env;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_nomfg_t		header;
 		uint8_t						status;
 	} reply;
+	PACKED_EPILOG
 	int retval;
 
 	// wpan_envelope_reply() will test for envelope == NULL
@@ -409,10 +411,12 @@ int _zcl_comm_command_send( wpan_envelope_t FAR *envelope)
 int zcl_comm_restart_device( wpan_envelope_t FAR *envelope,
 	const zcl_comm_restart_device_cmd_t *parameters)
 {
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_nomfg_t					header;
 		zcl_comm_restart_device_cmd_t		parameters;
 	} request;
+	PACKED_EPILOG
 	int retval;
 
 	retval = _zcl_comm_command_build( envelope, &request.header);
@@ -464,10 +468,12 @@ int zcl_comm_restart_device( wpan_envelope_t FAR *envelope,
 int zcl_comm_reset_parameters( wpan_envelope_t FAR *envelope,
 	const zcl_comm_reset_startup_param_t *parameters)
 {
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_nomfg_t					header;
 		zcl_comm_reset_startup_param_t	parameters;
 	} request;
+	PACKED_EPILOG
 	int retval;
 
 	retval = _zcl_comm_command_build( envelope, &request.header);
@@ -609,6 +615,7 @@ int zcl_comm_clust_handler( const wpan_envelope_t FAR *envelope,
 	if (envelope != NULL &&
 		ZCL_CMD_MATCH( envelope->payload, GENERAL, CLIENT_TO_SERVER, CLUSTER))
 	{
+		PACKED_PROLOG
 		const PACKED_STRUCT {
 			zcl_header_nomfg_t	zcl;
 			union {
@@ -618,6 +625,7 @@ int zcl_comm_clust_handler( const wpan_envelope_t FAR *envelope,
 				zcl_comm_reset_startup_param_t	reset_startup;
 			} cmd;
 		} FAR *request = envelope->payload;
+		PACKED_EPILOG
 		const zcl_attribute_tree_t FAR *tree = context;
 		zcl_comm_state_t FAR *comm;
 		uint32_t delay;

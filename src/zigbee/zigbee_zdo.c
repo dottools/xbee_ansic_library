@@ -248,11 +248,13 @@ int zdo_match_desc_request( void *buffer, int16_t buflen,
 	uint16_t addr_of_interest, uint16_t profile_id, const uint16_t *inClust,
 	const uint16_t *outClust)
 {
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t		transaction;
 		uint16_t		network_addr_le;
 		uint16_t		profile_id_le;
 	} *request;
+	PACKED_EPILOG
 	uint8_t			*clusters;
 	int				retval;
 	int				max_count;
@@ -330,11 +332,13 @@ int _zdo_match_desc_respond( const wpan_envelope_t FAR *envelope)
 	bool_t search;
 
 	// used to build response
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t									transaction;
 		zdo_match_desc_rsp_header_t		header;
 		uint8_t									endpoints[ZDO_MAX_ENDPOINTS];
 	} rsp;
+	PACKED_EPILOG
 	uint8_t *match_list;
 
 	if (envelope == NULL)
@@ -530,12 +534,14 @@ int _zdo_simple_desc_respond( const wpan_envelope_t FAR *envelope)
 	uint8_t *buffer;
 	int retval;
 
+	PACKED_PROLOG
 	PACKED_STRUCT _response {
 		uint8_t									transaction;
 		zdo_simple_desc_resp_header_t		header;
 		zdo_simple_desc_header_t			descriptor;
 		uint8_t									clusters[80];
 	} rsp;
+	PACKED_EPILOG
 	/// number of clusters that fit in cluster list, minus 2 count bytes
 	#define MAX_CLUSTERS ((sizeof rsp.clusters - 2) / sizeof(uint16_t))
 
@@ -660,11 +666,13 @@ zigbee_zdo_debug
 int _zdo_active_ep_respond( const wpan_envelope_t FAR *envelope)
 {
 	const wpan_endpoint_table_entry_t	*ep;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t									transaction;
 		zdo_active_ep_rsp_header_t			header;
 		uint8_t									endpoints[ZDO_MAX_ENDPOINTS];
 	} rsp;
+	PACKED_EPILOG
 	uint8_t *active_list;
 
 	if (envelope == NULL)
@@ -840,10 +848,12 @@ int zdo_send_bind_req( wpan_envelope_t *envelope, uint16_t type,
 	wpan_response_fn callback, void FAR *context)
 {
 	wpan_envelope_t				bind_env;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t						transaction;
 		zdo_bind_address_req_t	req;
 	} zdo;
+	PACKED_EPILOG
 	int								trans;
 
 	if (envelope == NULL || (type != ZDO_BIND_REQ && type != ZDO_UNBIND_REQ))
@@ -892,10 +902,12 @@ zigbee_zdo_debug
 int zdo_mgmt_leave_req( wpan_dev_t *dev, const addr64 *address, uint16_t flags)
 {
 	wpan_envelope_t			envelope;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t						transaction;
  		zdo_mgmt_leave_req_t		request;
 	} zdo;
+	PACKED_EPILOG
 
 	if (dev == NULL)
 	{
@@ -927,10 +939,12 @@ int zdo_send_descriptor_req( wpan_envelope_t *envelope, uint16_t cluster,
 	const void FAR *context)
 {
 	int retval;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t					transaction;
  		uint16_t					network_addr_le;
 	} zdo;
+	PACKED_EPILOG
 
 	if (envelope == NULL)
 	{
@@ -983,10 +997,12 @@ int _zdo_process_nwk_addr_resp( wpan_conversation_t FAR *conversation,
 	const wpan_envelope_t FAR *envelope)
 {
 	uint16_t FAR *net_addr;
+	PACKED_PROLOG
 	const PACKED_STRUCT {
 		uint8_t							transaction;
 		zdo_nwk_addr_rsp_header_t	header;
 	} FAR *response;
+	PACKED_EPILOG
 
 	// conversation is never NULL in a wpan_response_fn
 
@@ -1084,10 +1100,12 @@ int _zdo_process_ieee_addr_resp( wpan_conversation_t FAR *conversation,
 	const wpan_envelope_t FAR *envelope)
 {
 	addr64 FAR *ieee_be;
+	PACKED_PROLOG
 	const PACKED_STRUCT {
 		uint8_t							transaction;
 		zdo_ieee_addr_rsp_header_t	header;
 	} FAR *response;
+	PACKED_EPILOG
 	#ifdef ZIGBEE_ZDO_VERBOSE
 		char addr64_buf[ADDR64_STRING_LENGTH];
 	#endif

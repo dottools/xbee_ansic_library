@@ -190,10 +190,12 @@ int zcl_identify_command( const wpan_envelope_t FAR *envelope,
 	{
 		// commands sent to the Identify Server Cluster
 		// only use the stack if this isn't a general command
+		PACKED_PROLOG
 		PACKED_STRUCT {
 			zcl_header_response_t			header;
 			uint16_t								timeout;
 		} response;
+		PACKED_EPILOG
 		int offset;
 
 		#ifdef XBEE_ZCL_VERBOSE

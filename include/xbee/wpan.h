@@ -24,6 +24,7 @@
 
 XBEE_BEGIN_DECLS
 
+PACKED_PROLOG
 /// Format of XBee API frame type 0x90 (#XBEE_FRAME_RECEIVE);
 /// received from XBee by host.
 typedef PACKED_STRUCT xbee_frame_receive_t {
@@ -33,8 +34,10 @@ typedef PACKED_STRUCT xbee_frame_receive_t {
 	uint8_t			options;					///< bitfield, see XBEE_RX_OPT_xxx macros
 	uint8_t			payload[1];				///< multi-byte payload
 } xbee_frame_receive_t;
+PACKED_EPILOG
 
 
+PACKED_PROLOG
 /// Format of XBee API frame type 0x91 (#XBEE_FRAME_RECEIVE_EXPLICIT);
 /// received from XBee by host.
 typedef PACKED_STRUCT xbee_frame_receive_explicit_t {
@@ -48,6 +51,7 @@ typedef PACKED_STRUCT xbee_frame_receive_explicit_t {
 	uint8_t			options;					///< bitfield, see XBEE_RX_OPT_xxx macros
 	uint8_t			payload[1];				///< multi-byte payload
 } xbee_frame_receive_explicit_t;
+PACKED_EPILOG
 
 int xbee_wpan_init( xbee_dev_t *xbee,
 	const wpan_endpoint_table_entry_t *ep_table);
@@ -58,6 +62,7 @@ int xbee_wpan_init( xbee_dev_t *xbee,
 int _xbee_handle_receive_explicit( xbee_dev_t *xbee, const void FAR *raw,
 	uint16_t length, void FAR *context);
 
+PACKED_PROLOG
 /// Format of XBee API frame type 0x10 (#XBEE_FRAME_TRANSMIT); sent
 /// from host to XBee.  Note that the network stack does not include a
 /// function for sending this frame type -- use an explicit transmit frame
@@ -74,7 +79,9 @@ typedef PACKED_STRUCT xbee_header_transmit_t {
 	uint8_t			broadcast_radius;		///< set to 0 for maximum hop value
 	uint8_t			options;					///< combination of XBEE_TX_OPT_* macros
 } xbee_header_transmit_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Format of XBee API frame type 0x11 (#XBEE_FRAME_TRANSMIT_EXPLICIT); sent
 /// from host to XBee.
 typedef PACKED_STRUCT xbee_header_transmit_explicit_t {
@@ -89,6 +96,7 @@ typedef PACKED_STRUCT xbee_header_transmit_explicit_t {
 	uint8_t			broadcast_radius;		///< set to 0 for maximum hop value
 	uint8_t			options;					///< combination of XBEE_TX_OPT_* macros
 } xbee_header_transmit_explicit_t;
+PACKED_EPILOG
 
 /*	@name
 	Options for \c options field of xbee_header_transmit_t and
@@ -115,6 +123,7 @@ typedef PACKED_STRUCT xbee_header_transmit_explicit_t {
 #define XBEE_TX_OPT_MODE_DIGIMESH			(3<<6)
 //@}
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_frame_transmit_status_t {
 	uint8_t			frame_type;			//< XBEE_FRAME_TRANSMIT_STATUS (0x8B)
 	uint8_t			frame_id;
@@ -220,6 +229,7 @@ typedef PACKED_STRUCT xbee_frame_transmit_status_t {
 //@}
 
 } xbee_frame_transmit_status_t;
+PACKED_EPILOG
 
 /**
 	@internal

@@ -78,14 +78,17 @@ XBEE_BEGIN_DECLS
 /// Maximum length of a Node ID string (ATNI value) (excludes null terminator).
 #define XBEE_DISC_MAX_NODEID_LEN 20
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_node_id1_t {
 	uint16_t			network_addr_be;		///< ATMY value [0xFFFE on DigiMesh]
 	addr64			ieee_addr_be;			///< ATSH and ATSL
 	/// null-terminated ATNI value (variable length)
 	char				node_info[XBEE_DISC_MAX_NODEID_LEN + 1];
 } xbee_node_id1_t;
+PACKED_EPILOG
 
 // data following variable-length node info
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_node_id2_t {
 	uint16_t			parent_addr_be;		///< ATMP value [0xFFFE on DigiMesh]
 
@@ -109,8 +112,10 @@ typedef PACKED_STRUCT xbee_node_id2_t {
 	/// RSSI of packet [optional field enabled with ATNO on DigiMesh]
 	uint8_t			rssi;
 } xbee_node_id2_t;
+PACKED_EPILOG
 
 /// format of 0x95 frames received from XBee
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_frame_node_id_t {
 	uint8_t				frame_type;			///< XBEE_FRAME_NODE_ID (0x95)
 	addr64				ieee_address_be;
@@ -120,6 +125,7 @@ typedef PACKED_STRUCT xbee_frame_node_id_t {
 	xbee_node_id1_t	node_data;
 	// an xbee_node_id2_t follows the variable-length xbee_node_id1_t
 } xbee_frame_node_id_t;
+PACKED_EPILOG
 
 /// parsed Node ID in host-byte-order and fixed length fields
 typedef struct xbee_node_id_t {

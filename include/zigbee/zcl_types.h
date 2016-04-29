@@ -271,6 +271,7 @@ XBEE_BEGIN_DECLS
 typedef uint32_t zcl_utctime_t;
 #define ZCL_UTCTIME_INVALID		0xFFFFFFFF
 
+PACKED_PROLOG
 /// Time of Day (for #ZCL_TYPE_TIME_TOD Data Type)
 typedef PACKED_STRUCT zcl_timeofday_t {
 	uint8_t	hours;		///< 0-23 or 0xff for unused
@@ -278,7 +279,9 @@ typedef PACKED_STRUCT zcl_timeofday_t {
 	uint8_t	seconds;		///< 0-59 or 0xff for unused
 	uint8_t	hundredths;	///< 0-99 or 0xff for unused
 } zcl_timeofday_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Date (for #ZCL_TYPE_TIME_DATE Data Type)
 typedef PACKED_STRUCT zcl_date_t {
 	uint8_t	year;			///< year - 1900 or 0xff for unused
@@ -286,6 +289,7 @@ typedef PACKED_STRUCT zcl_date_t {
 	uint8_t	day;			///< 1-31 or 0xff for unused
 	uint8_t	dayofweek;	///< 1-7 (1 = Monday, 7 = Sunday) or 0xff for unused
 } zcl_date_t;
+PACKED_EPILOG
 
 /** @name ZCL Identifier (discrete) Types
 	@{
@@ -323,6 +327,7 @@ typedef PACKED_STRUCT zcl_date_t {
 /// 40-bit unsigned in host-byte-order
 typedef union zcl40_t {
 	uint8_t		u8[5];
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		#if BYTE_ORDER == LITTLE_ENDIAN
 			uint32_t	low32;
@@ -332,12 +337,14 @@ typedef union zcl40_t {
 			uint32_t	low32;
 		#endif
 	} mixed;
+	PACKED_EPILOG
 } zcl40_t;
 
 /// 48-bit unsigned in host-byte-order
 typedef union zcl48_t {
 	uint8_t		u8[6];
 	uint16_t		u16[3];
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		#if BYTE_ORDER == LITTLE_ENDIAN
 			uint32_t	low32;
@@ -347,6 +354,7 @@ typedef union zcl48_t {
 			uint32_t	low32;
 		#endif
 	} mixed;
+	PACKED_EPILOG
 } zcl48_t;
 
 // load separate header containing definition of zcl64_t and macros

@@ -120,6 +120,8 @@ int zdo_match_desc_request(void *buffer, int16_t buflen,
 #define ZDO_NWK_ADDR_REQ		0x0000
 /// cluster ID for ZDO NWK_addr response
 #define ZDO_NWK_ADDR_RSP		0x8000
+
+PACKED_PROLOG
 /// frame format for ZDO NKW_addr request
 typedef PACKED_STRUCT zdo_nwk_addr_req_t {
 	uint8_t		transaction;
@@ -127,7 +129,9 @@ typedef PACKED_STRUCT zdo_nwk_addr_req_t {
 	uint8_t		request_type;		///< See ZDO_REQUEST_TYPE_* macros
 	uint8_t		start_index;
 } zdo_nwk_addr_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zdo_nwk_addr_rsp_header_t {
 	uint8_t		status;
 	addr64		ieee_remote_le;
@@ -136,6 +140,7 @@ typedef PACKED_STRUCT zdo_nwk_addr_rsp_header_t {
 	uint8_t		start_index;
 	// followed by variable-length list of 16-bit associated device addresses
 } zdo_nwk_addr_rsp_header_t;
+PACKED_EPILOG
 
 #define ZDO_NET_ADDR_PENDING			0xFFFE
 #define ZDO_NET_ADDR_TIMEOUT			0xFFFF
@@ -178,6 +183,8 @@ int zdo_send_nwk_addr_req( wpan_dev_t *dev, const addr64 FAR *ieee_be,
 #define ZDO_IEEE_ADDR_REQ		0x0001
 /// cluster ID for ZDO IEEE_addr response
 #define ZDO_IEEE_ADDR_RSP		0x8001
+
+PACKED_PROLOG
 /// frame format for ZDO IEEE_addr request
 typedef PACKED_STRUCT zdo_ieee_addr_req_t {
 	uint8_t		transaction;
@@ -185,6 +192,7 @@ typedef PACKED_STRUCT zdo_ieee_addr_req_t {
 	uint8_t		request_type;		///< See ZDO_REQUEST_TYPE_* macros
 	uint8_t		start_index;
 } zdo_ieee_addr_req_t;
+PACKED_EPILOG
 
 typedef zdo_nwk_addr_rsp_header_t zdo_ieee_addr_rsp_header_t;
 
@@ -257,13 +265,17 @@ int zdo_send_ieee_addr_req( wpan_dev_t *dev, uint16_t net_addr,
 #define ZDO_NODE_DESC_REQ		0x0002
 /// cluster ID for ZDO Node_Desc response
 #define ZDO_NODE_DESC_RSP		0x8002
+
+PACKED_PROLOG
 /// frame format for ZDO Node_Desc request
 /// @see zdo_send_descriptor_req()
 typedef PACKED_STRUCT zdo_node_desc_req_t {
 	uint8_t		transaction;
 	uint16_t		network_addr_le;
 } zdo_node_desc_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// frame format for ZDO Node_Desc response
 typedef PACKED_STRUCT zdo_node_desc_t {
 	uint8_t		flags0;
@@ -276,6 +288,7 @@ typedef PACKED_STRUCT zdo_node_desc_t {
 	uint16_t		max_outgoing_le;
 	uint8_t		desc_capability;
 } zdo_node_desc_t;
+PACKED_EPILOG
 
 #define ZDO_NODE_DESC_FLAGS0_TYPE_MASK						0x07
 #define ZDO_NODE_DESC_FLAGS0_TYPE_COORD					0x00
@@ -322,11 +335,13 @@ typedef PACKED_STRUCT zdo_node_desc_t {
 // bits 7 through 15 are reserved
 //@}
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zdo_node_desc_resp_t {
 	uint8_t					status;					///< see ZDO_STATUS_* macros
 	uint16_t					network_addr_le;
 	zdo_node_desc_t		node_desc;
 } zdo_node_desc_resp_t;
+PACKED_EPILOG
 
 /*********************************************************
 					Power Descriptor
@@ -335,12 +350,15 @@ typedef PACKED_STRUCT zdo_node_desc_resp_t {
 #define ZDO_POWER_DESC_REQ		0x0003
 /// cluster ID for ZDO Power_Desc response
 #define ZDO_POWER_DESC_RSP		0x8003
+
+PACKED_PROLOG
 /// frame format for ZDO Power_Desc request
 /// @see zdo_send_descriptor_req()
 typedef PACKED_STRUCT zdo_power_desc_req_t {
 	uint8_t		transaction;
 	uint16_t		network_addr_le;
 } zdo_power_desc_req_t;
+PACKED_EPILOG
 
 /** @name PowerDescriptor macros
 	macros used in PowerDescriptor (zdo_power_desc_t)
@@ -375,18 +393,22 @@ typedef PACKED_STRUCT zdo_power_desc_req_t {
 #define ZDO_POWER1_CURRENT_RESERVED		ZDO_POWER_SOURCE_RESERVED
 //@}
 
+PACKED_PROLOG
 /// format for ZDO PowerDescriptor
 typedef PACKED_STRUCT zdo_power_desc_t {
 	uint8_t		power0;		///< combination of ZDO_POWER0_* macros
 	uint8_t		power1;		///< combination of ZDO_POWER1_* macros
 } zdo_power_desc_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// frame format for ZDO Power_Desc response
 typedef PACKED_STRUCT zdo_power_desc_rsp_t {
 	uint8_t					status;					///< see ZDO_STATUS_* macros
 	uint16_t					network_addr_le;
 	zdo_power_desc_t		power_desc;
 } zdo_power_desc_rsp_t;
+PACKED_EPILOG
 
 
 /*********************************************************
@@ -396,13 +418,17 @@ typedef PACKED_STRUCT zdo_power_desc_rsp_t {
 #define ZDO_SIMPLE_DESC_REQ	0x0004
 /// cluster ID for ZDO Simple_Desc response
 #define ZDO_SIMPLE_DESC_RSP	0x8004
+
+PACKED_PROLOG
 /// frame format for ZDO Simple_Desc request
 typedef PACKED_STRUCT zdo_simple_desc_req_t {
 	uint8_t		transaction;
 	uint16_t		network_addr_le;
 	uint8_t		endpoint;			///< 0x01 to 0xFE
 } zdo_simple_desc_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// header for ZDO Simple_Desc response, followed by a SimpleDescriptor
 typedef PACKED_STRUCT zdo_simple_desc_resp_header_t {
 	uint8_t		status;				///< see ZDO_STATUS_* macros
@@ -410,7 +436,9 @@ typedef PACKED_STRUCT zdo_simple_desc_resp_header_t {
 	uint8_t		length;				///< length of simple descriptor
 	// variable-length simple descriptor follows
 } zdo_simple_desc_resp_header_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// header for ZDO SimpleDescriptor (part of a Simple_Desc response), followed
 /// by uint8_t input cluster count, multiple uint16_t input cluster IDs,
 /// uint8_t output cluster count, multiple uint16_t output cluster IDs
@@ -421,6 +449,7 @@ typedef PACKED_STRUCT zdo_simple_desc_header_t {
 	uint8_t		device_version;	///< upper 4 bits are reserved
 	// variable-length cluster counts and ids follow
 } zdo_simple_desc_header_t;
+PACKED_EPILOG
 
 /**
 	@brief Send a ZDO Simple Descriptor Request.
@@ -462,13 +491,17 @@ int zdo_simple_desc_request( wpan_envelope_t *envelope,
 #define ZDO_ACTIVE_EP_REQ		0x0005
 /// cluster ID for ZDO Active_EP response
 #define ZDO_ACTIVE_EP_RSP		0x8005
+
+PACKED_PROLOG
 /// frame format for ZDO Active_EP request
 /// @see zdo_send_descriptor_req()
 typedef PACKED_STRUCT zdo_active_ep_req_t {
 	uint8_t		transaction;
 	uint16_t		network_addr_le;
 } zdo_active_ep_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// header for ZDO Active_EP response, followed by \c .ep_count
 /// uint8_t endpoints
 typedef PACKED_STRUCT zdo_active_ep_rsp_header_t {
@@ -476,6 +509,7 @@ typedef PACKED_STRUCT zdo_active_ep_rsp_header_t {
 	uint16_t		network_addr_le;
 	uint8_t		ep_count;
 } zdo_active_ep_rsp_header_t;
+PACKED_EPILOG
 
 
 /*********************************************************
@@ -485,6 +519,8 @@ typedef PACKED_STRUCT zdo_active_ep_rsp_header_t {
 #define ZDO_MATCH_DESC_REQ		0x0006
 /// cluster ID for ZDO Match_Desc response
 #define ZDO_MATCH_DESC_RSP		0x8006
+
+PACKED_PROLOG
 /// header for ZDO Match_Desc request
 typedef PACKED_STRUCT zdo_match_desc_req_t {
 	uint8_t		transaction;
@@ -493,7 +529,9 @@ typedef PACKED_STRUCT zdo_match_desc_req_t {
 	uint8_t		num_in_clusters;
 	uint16_t		in_cluster_list[1];		///< variable length
 } zdo_match_desc_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Second half of Match_Desc request.
 /// cast to address of zdo_match_desc_req_t
 ///			+ offsetof \c .in_cluster_list + 2 * \c .num_in_clusters
@@ -501,7 +539,9 @@ typedef PACKED_STRUCT zdo_match_desc_out_clust_t {
 	uint8_t		num_out_clusters;
 	uint16_t		out_cluster_list[1];		///< variable length
 } zdo_match_desc_out_clust_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// header for ZDO Match_Desc response, followed by \c .match_length
 /// uint8_t endpoints
 typedef PACKED_STRUCT zdo_match_desc_rsp_header_t {
@@ -509,6 +549,7 @@ typedef PACKED_STRUCT zdo_match_desc_rsp_header_t {
 	uint16_t		network_addr_le;
 	uint8_t		match_length;
 } zdo_match_desc_rsp_header_t;		// followed by <match_length> bytes
+PACKED_EPILOG
 
 
 /*********************************************************
@@ -518,12 +559,15 @@ typedef PACKED_STRUCT zdo_match_desc_rsp_header_t {
 #define ZDO_COMPLEX_DESC_REQ		0x0007
 /// cluster ID for ZDO Complex_Desc response
 #define ZDO_COMPLEX_DESC_RSP		0x8007
+
+PACKED_PROLOG
 /// frame format for ZDO Complex_Desc request
 /// @see zdo_send_descriptor_req()
 typedef PACKED_STRUCT zdo_complex_desc_req_t {
 	uint8_t		transaction;
 	uint16_t		network_addr_le;
 } zdo_complex_desc_req_t;
+PACKED_EPILOG
 
 
 /*********************************************************
@@ -533,12 +577,15 @@ typedef PACKED_STRUCT zdo_complex_desc_req_t {
 #define ZDO_USER_DESC_REQ			0x0011
 /// cluster ID for ZDO User_Desc response
 #define ZDO_USER_DESC_RSP			0x8011
+
+PACKED_PROLOG
 /// frame format for ZDO Complex_Desc request
 /// @see zdo_send_descriptor_req()
 typedef PACKED_STRUCT zdo_user_desc_req_t {
 	uint8_t		transaction;
 	uint16_t		network_addr_le;
 } zdo_user_desc_req_t;
+PACKED_EPILOG
 
 
 /*********************************************************
@@ -547,6 +594,8 @@ typedef PACKED_STRUCT zdo_user_desc_req_t {
 /// cluster ID for ZDO Device_annce announcement
 #define ZDO_DEVICE_ANNCE			0x0013
 // Device_annce does not have a response (0x8013 is not used)
+
+PACKED_PROLOG
 /// frame format for a ZDO Device_annce announcement
 typedef PACKED_STRUCT zdo_device_annce_t {
 	uint8_t		transaction;
@@ -554,6 +603,7 @@ typedef PACKED_STRUCT zdo_device_annce_t {
 	addr64		ieee_address_le;
 	uint8_t		capability;		///< see ZDO_CAPABILITY_* macros
 } zdo_device_annce_t;
+PACKED_EPILOG
 
 /// Entry for Device Annce handler in cluster table of ZDO endpoint
 #define ZDO_DEVICE_ANNCE_CLUSTER( handler, context) \
@@ -572,20 +622,25 @@ typedef PACKED_STRUCT zdo_device_annce_t {
 /// cluster ID for ZDO Unbind response
 #define ZDO_UNBIND_RSP				0x8022
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zdo_bind_req_header_t {
 	addr64		src_address_le;
 	uint8_t		src_endpoint;
 	uint16_t		cluster_id_le;
 	uint8_t		dst_addr_mode;
 } zdo_bind_req_header_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// frame format for a ZDO Bind Request with a group address as the
 /// destination (header.dst_addr_mode == ZDO_BIND_DST_MODE_GROUP)
 typedef PACKED_STRUCT zdo_bind_group_req_t {
 	zdo_bind_req_header_t	header;
 	uint16_t						group_addr_le;
 } zdo_bind_group_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// frame format for a ZDO Bind Request with an IEEE address and endpoint
 /// as the destination (header.dst_addr_mode == ZDO_BIND_DST_MODE_ADDR)
 typedef PACKED_STRUCT zdo_bind_address_req_t {
@@ -593,6 +648,7 @@ typedef PACKED_STRUCT zdo_bind_address_req_t {
 	addr64						dst_address_le;
 	uint8_t						dst_endpoint;
 } zdo_bind_address_req_t;
+PACKED_EPILOG
 
 typedef union zdo_bind_req_t {
 	zdo_bind_req_header_t	header;
@@ -639,6 +695,7 @@ int zdo_send_bind_req( wpan_envelope_t *envelope, uint16_t type,
 /// cluster ID for ZDO Management Leave Response
 #define ZDO_MGMT_LEAVE_RSP			0x8034
 
+PACKED_PROLOG
 /// frame format for a ZDO Management Leave Request
 typedef PACKED_STRUCT zdo_mgmt_leave_req_t {
 	addr64		device_address;
@@ -647,10 +704,13 @@ typedef PACKED_STRUCT zdo_mgmt_leave_req_t {
 		#define ZDO_MGMT_LEAVE_REQ_FLAG_REJOIN					0x01
 		#define ZDO_MGMT_LEAVE_REQ_FLAG_REMOVE_CHILDREN		0x02
 } zdo_mgmt_leave_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zdo_mgmt_leave_rsp_t {
 	uint8_t		status;
 } zdo_mgmt_leave_rsp_t;
+PACKED_EPILOG
 
 /// extra sending option for zdo_mgmt_leave_req
 #define ZDO_MGMT_LEAVE_REQ_ENCRYPTED		0x0100

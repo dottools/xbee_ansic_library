@@ -490,10 +490,12 @@ _xbee_device_debug
 int xbee_frame_write( xbee_dev_t *xbee, const void FAR *header,
 	uint16_t headerlen, const void FAR *data, uint16_t datalen, uint16_t flags)
 {
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t	start;
 		uint16_t	length_be;
 	} prefix;
+	PACKED_EPILOG
 
 	int cts, free, used, framesize;
 	uint8_t checksum = 0xFF;

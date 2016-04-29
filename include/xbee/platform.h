@@ -190,6 +190,16 @@
 	platforms with gcc, it's defined as [struct __attribute__ ((__packed__))].
 	Defaults to just [struct]
 
+	@def PACKED_PROLOG
+	Alternative to PACKED_STRUCT for Visual Studio compiler. Used before a packed
+	structure. Defined as [__pragma(pack(1))] when _MSC_VER defined.
+	Defaults to nothing [].
+
+	@def PACKED_EPILOG
+	Alternative to PACKED_STRUCT for Visual Studio compiler. Used after a packed
+	structure. Defined as [__pragma(pack())] when _MSC_VER defined.
+	Defaults to nothing [].
+
 	@def INTERRUPT_DISABLE
 	Disable CPU interrupts (at the level of the serial port driver, at least).
 
@@ -349,6 +359,10 @@
 
 #ifndef PACKED_STRUCT
 	#define PACKED_STRUCT struct
+#endif
+#ifndef PACKED_PROLOG
+	#define PACKED_PROLOG
+	#define PACKED_EPILOG
 #endif
 
 // Most platforms don't have alignment requirements, and we can just use casts.

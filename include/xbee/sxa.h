@@ -63,6 +63,7 @@ enum
 /// 'value' field may be different.
 #define _SXA_CACHED_PREFIX_SIZE	(sizeof(sxa_cache_flags_t))
 
+PACKED_PROLOG
 /**
 	Cached generic register value (no data)
 */
@@ -70,7 +71,9 @@ typedef PACKED_STRUCT
 {
 	sxa_cache_flags_t	flags;	///< Cache status flags (#_SXA_CACHED_OK etc.)
 } sxa_cached_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /**
 	Cached uint8_t register value
 */
@@ -79,7 +82,9 @@ typedef PACKED_STRUCT
 	sxa_cache_flags_t	flags;	///< Cache status flags (#_SXA_CACHED_OK etc.)
    uint8_t	value;	///< Cached value
 } sxa_cached_uint8_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /**
 	Cached uint16_t register value
 */
@@ -88,7 +93,9 @@ typedef PACKED_STRUCT
 	sxa_cache_flags_t	flags;	///< Cache status flags (#_SXA_CACHED_OK etc.)
    uint16_t	value;	///< Cached value
 } sxa_cached_uint16_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /**
 	Cached uint32_t register value
 */
@@ -97,7 +104,9 @@ typedef PACKED_STRUCT
 	sxa_cache_flags_t	flags;	///< Cache status flags (#_SXA_CACHED_OK etc.)
    uint32_t	value;	///< Cached value
 } sxa_cached_uint32_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /**
 	Cached extended address register value
 */
@@ -106,6 +115,7 @@ typedef PACKED_STRUCT
 	sxa_cache_flags_t	flags;	///< Cache status flags (#_SXA_CACHED_OK etc.)
    addr64	value;	///< Cached value
 } sxa_cached_addr64;
+PACKED_EPILOG
 
 /**
 	Cached string register value.  This is in the form of a macro which
@@ -115,7 +125,9 @@ typedef PACKED_STRUCT
    One extra char is automatically added, for the null terminator.
 */
 #define _SXA_CACHED_STRING(name, len) \
-	PACKED_STRUCT { sxa_cache_flags_t flags; uint8_t value[len+1]; } name
+	PACKED_PROLOG \
+	PACKED_STRUCT { sxa_cache_flags_t flags; uint8_t value[len+1]; } name \
+	PACKED_EPILOG
 
 /**
 	Cached binary register value.  This is in the form of a macro which
@@ -123,7 +135,9 @@ typedef PACKED_STRUCT
    with generally different maximum lengths.
 */
 #define _SXA_CACHED_BIN(name, len) \
-	PACKED_STRUCT { sxa_cache_flags_t flags; uint8_t value[len]; } name
+	PACKED_PROLOG \
+	PACKED_STRUCT { sxa_cache_flags_t flags; uint8_t value[len]; } name \
+	PACKED_EPILOG
 
 
 struct sxa_cached_group_t;

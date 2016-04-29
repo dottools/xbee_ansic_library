@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx;h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\zigbee">
+      <UniqueIdentifier>{2c600c92-3a12-4463-b125-ac8e221272e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\xbee">
+      <UniqueIdentifier>{dc964116-0e9d-42db-9b7f-eb224fcc5267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win32">
+      <UniqueIdentifier>{d5ba06f3-e66d-459b-a42d-ebabf6639a4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wpan">
+      <UniqueIdentifier>{d2fcdf7c-b406-4434-9463-4e67effd59b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\win32\xbee_platform_win32.c">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\win32\xbee_serial_win32.c">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\wpan\wpan_aps.c">
+      <Filter>Source Files\wpan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\wpan\wpan_types.c">
+      <Filter>Source Files\wpan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_atcmd.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_atmode.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_cbuf.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_commissioning.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_device.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_discovery.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_ebl_file.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_firmware.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_gpm.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_io.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_ota_client.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_ota_server.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_reg_descr.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_route.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_scan.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_sxa.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_time.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_transparent_serial.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_wifi.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_wpan.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\xbee\xbee_xmodem.c">
+      <Filter>Source Files\xbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_basic.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_client.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_commissioning.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_identify.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_onoff.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_time.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zcl_types.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zigbee_zcl.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\zigbee\zigbee_zdo.c">
+      <Filter>Source Files\zigbee</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\wpan\aps.h">
+      <Filter>Source Files\wpan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\wpan\types.h">
+      <Filter>Source Files\wpan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\atcmd.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\atmode.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\byteorder.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\cbuf.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\commissioning.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\device.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\discovery.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\ebl_file.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\firmware.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\gpm.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\io.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\jslong.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\jslong_glue.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\ota_client.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\ota_server.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform_dos.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform_hcs08.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform_mbed.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform_posix.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform_rabbit.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\platform_win32.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\reg_descr.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\route.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\scan.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\serial.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\sxa.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\sxa_socket.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\time.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\transparent_serial.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\wifi.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\wpan.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\xmodem.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xbee\xmodem_crc16.h">
+      <Filter>Source Files\xbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_bacnet.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_basic.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_basic_attributes.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_client.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_commissioning.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_identify.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_onoff.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_time.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl_types.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zcl64.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\zigbee\zdo.h">
+      <Filter>Source Files\zigbee</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

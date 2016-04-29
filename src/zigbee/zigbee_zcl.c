@@ -247,11 +247,13 @@ int zcl_build_header( zcl_header_response_t *rsp, zcl_command_t *cmd)
 zigbee_zcl_debug
 int zcl_default_response( zcl_command_t *request, uint8_t status)
 {
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_response_t		header;
 		uint8_t							command;
 		uint8_t							status;
 	} response;
+	PACKED_EPILOG
 	uint8_t								*start;
 
 	if (request == NULL)
@@ -842,10 +844,12 @@ int _zcl_write_attributes( zcl_command_t *cmd)
 {
 	int16_t									length;
 	uint_fast8_t							pass;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_response_t			header;
 		zcl_rec_write_attrib_status_t	status[25];		// limit to how many recs?
 	} response;
+	PACKED_EPILOG
 	uint8_t									*start_response;
 	zcl_rec_write_attrib_status_t		*status_rec;
 	zcl_attribute_write_rec_t			parse_record;
@@ -1244,10 +1248,12 @@ int _zcl_read_attributes( zcl_command_t *cmd)
 	uint16_t									attribute;
 	uint16_t							FAR	*id_le;
 	const zcl_attribute_base_t	FAR	*entry;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_response_t			header;
 		uint8_t								buffer[80];		// limit to how many bytes?
 	} response;
+	PACKED_EPILOG
 	uint8_t									*start_response;
 	uint8_t									*end_response;
 	int										bytesleft;
@@ -1361,11 +1367,13 @@ zigbee_zcl_debug
 int _zcl_discover_attributes( zcl_command_t *cmd)
 {
 	const zcl_discover_attrib_t	FAR	*discover;
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		zcl_header_response_t				header;
 		uint8_t									complete;
 		zcl_rec_attrib_report_t				attribs[ZCL_DISCOVER_ATTRIB_MAX];
 	} response;
+	PACKED_EPILOG
 	uint8_t										*start_response;
 	zcl_rec_attrib_report_t 				*write_attrib;
 	const zcl_attribute_base_t		FAR	*attribute;

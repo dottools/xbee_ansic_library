@@ -30,10 +30,50 @@ uint32_t xbee_millisecond_timer()
 	return GetTickCount();
 }
 
+#ifdef _MSC_VER
+// Provided by http://stackoverflow.com/a/17283549/139041
+// Modified to keep the timer object persistent.
+
+static HANDLE sleepTimer = NULL;
+
+static void usleep_exit(void)
+{
+	if(sleepTimer)
+		CloseHandle(sleepTimer);
+}
+
+int usleep(__int64 usec)
+{ 
+	LARGE_INTEGER ft;
+
+	ft.QuadPart = -(10*usec); // Convert to 100 nanosecond interval, negative value indicates relative time
+
+	if(!sleepTimer)
+	{
+		sleepTimer = CreateWaitableTimer(NULL, TRUE, NULL);
+		if(!sleepTimer)
+		{
+			errno = ENOMEM;
+			return -1;
+		} else
+		{
+			atexit(usleep_exit);
+		}
+	}
+
+	SetWaitableTimer(sleepTimer, &ft, 0, NULL, NULL, 0);
+	WaitForSingleObject(sleepTimer, INFINITE);
+
+	return 0;
+}
+#endif
+
 #include <ctype.h>			// isprint()
 #include <stdio.h>			// fputs(), fflush(), getchar(), putchar()
 #include <conio.h>			// kbhit()
-#include <unistd.h>			// usleep()
+#ifndef _MSC_VER
+	#include <unistd.h>		// usleep()
+#endif
 
 #define XBEE_READLINE_STATE_INIT				0
 #define XBEE_READLINE_STATE_START_LINE		1

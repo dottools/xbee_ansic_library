@@ -103,10 +103,12 @@ zcl_client_debug
 int zcl_client_read_attributes( wpan_envelope_t FAR *envelope,
 	const zcl_client_read_t *client_read)
 {
-   PACKED_STRUCT {
+	PACKED_PROLOG
+	PACKED_STRUCT {
 		zcl_header_response_t	header;
 		uint16_t						attrib_le[20];
 	} zcl_req;
+	PACKED_EPILOG
 	uint8_t							*request_start;
 	const uint16_t			FAR *attrib_src;
 	uint16_t							*attrib_dst_le;
@@ -182,11 +184,13 @@ zcl_client_debug
 int _zcl_send_read_from_zdo_match( wpan_conversation_t FAR *conversation,
 	const wpan_envelope_t FAR *envelope)
 {
+	PACKED_PROLOG
 	const PACKED_STRUCT {
 		uint8_t								transaction_id;
 		zdo_match_desc_rsp_header_t	header;
 		uint8_t								endpoint;
 	}									FAR *zdo_rsp;
+	PACKED_EPILOG
 	zcl_client_read_t						client_read;
 	wpan_envelope_t						reply_envelope;		// for sending ZCL request
 	const wpan_cluster_table_entry_t *cluster;
@@ -497,10 +501,12 @@ int zcl_send_write_attributes( wpan_envelope_t *envelope,
 	const zcl_attribute_base_t FAR *attr_list)
 {
 	const wpan_endpoint_table_entry_t *source_endpoint;
+	PACKED_PROLOG
 	PACKED_STRUCT request {
 		zcl_header_nomfg_t	header;
 		uint8_t					payload[80];
 	} request;
+	PACKED_EPILOG
 	int bytecount;
 	int retval = 0;
 

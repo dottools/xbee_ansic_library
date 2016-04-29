@@ -149,47 +149,62 @@ XBEE_BEGIN_DECLS
 // 3 or 5-byte ZCL header followed by variable-length payload
 //
 
+PACKED_PROLOG
 /// Common portion of ZCL header (appears after optional Manufacturer Code)
 typedef PACKED_STRUCT zcl_header_common_t {
 	uint8_t	sequence;
 	uint8_t	command;
 	uint8_t	payload[1];		///< first byte of variable-length field
 } zcl_header_common_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// General header for casting onto an incoming frame.  Reference .type.mfg
 /// if (.frame_control & ZCL_FRAME_MFG_SPECIFIC != 0).  Reference .type.std
 /// otherwise.
 typedef PACKED_STRUCT zcl_header_t {
 	uint8_t	frame_control;
 	union {
+		PACKED_PROLOG
 		PACKED_STRUCT {
 	      uint16_t					mfg_code_le;
 	      zcl_header_common_t	common;
 	   } mfg;					///< manufacturer-specific extension
+	   PACKED_EPILOG
+		PACKED_PROLOG
 		PACKED_STRUCT {
 	      zcl_header_common_t	common;
 	   } std;					///< standard
+	   PACKED_EPILOG
 	} type;
 } zcl_header_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// ZCL header structure used for building response frames that may or may not
 /// be manufacturer-specific.  Frame is sent starting with element
 /// .u.mfg.frame_control or .u.std.frame_control.
 typedef PACKED_STRUCT zcl_header_response_t {
 	union {
+		PACKED_PROLOG
 		PACKED_STRUCT {
 			uint8_t		frame_control;
 			uint16_t		mfg_code_le;
 		} mfg;
+		PACKED_EPILOG
+		PACKED_PROLOG
 		PACKED_STRUCT {
 			uint16_t		dummy;
 			uint8_t		frame_control;
 		} std;
+		PACKED_EPILOG
 	} u;
 	uint8_t						sequence;
 	uint8_t						command;
 } zcl_header_response_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// ZLC header structure used when building a manufacturer-specific response
 /// frame.
 typedef PACKED_STRUCT zcl_header_withmfg_t {
@@ -198,7 +213,9 @@ typedef PACKED_STRUCT zcl_header_withmfg_t {
 	uint8_t	sequence;
 	uint8_t	command;
 } zcl_header_withmfg_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// ZLC header structure used when building a normal (non-manufacturer-specific
 /// response frame.
 typedef PACKED_STRUCT zcl_header_nomfg_t {
@@ -206,6 +223,7 @@ typedef PACKED_STRUCT zcl_header_nomfg_t {
 	uint8_t	sequence;
 	uint8_t	command;
 } zcl_header_nomfg_t;
+PACKED_EPILOG
 
 /** @name
 	Bit masks for the frame_control field of a ZCL header (zcl_header_t,
@@ -409,6 +427,7 @@ const char *zcl_status_text( uint_fast8_t status);
 
 //@}
 
+PACKED_PROLOG
 /// General format for an attribute, used for Write Attributes and Report
 /// Attributes commands.
 typedef PACKED_STRUCT zcl_attrib_t {
@@ -416,7 +435,9 @@ typedef PACKED_STRUCT zcl_attrib_t {
 	uint8_t	type;			///< see zigbee/zcl_types.h
 	uint8_t	value[1];	///< variable length, depending on type
 } zcl_attrib_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Used for #ZCL_CMD_READ_ATTRIB_RESP.
 typedef PACKED_STRUCT zcl_rec_read_attrib_resp_t {
 	uint16_t	id_le;
@@ -424,12 +445,16 @@ typedef PACKED_STRUCT zcl_rec_read_attrib_resp_t {
 	uint8_t	type;			///< only included if status == ZCL_STATUS_SUCCESS
 	uint8_t	value[1];	///< variable length, only if ZCL_STATUS_SUCCESS
 } zcl_rec_read_attrib_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_read_attrib_error_resp_t {
 	uint16_t	id_le;
 	uint8_t	status;
 } zcl_rec_read_attrib_error_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_read_attrib_array_resp_t {
 	uint16_t	id_le;
 	uint8_t	status;
@@ -438,7 +463,9 @@ typedef PACKED_STRUCT zcl_rec_read_attrib_array_resp_t {
 	uint16_t	count_le;
 	uint8_t	value[1];	///< variable length, only if ZCL_STATUS_SUCCESS
 } zcl_rec_read_attrib_array_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_read_attrib_struct_resp_t {
 	uint16_t	id_le;
 	uint8_t	status;
@@ -446,12 +473,15 @@ typedef PACKED_STRUCT zcl_rec_read_attrib_struct_resp_t {
 	uint16_t	count_le;		///< number of elements to follow
 	uint8_t	elements[1];	///< mult. uint8_t type and variable-length value
 } zcl_rec_read_attrib_struct_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Used for #ZCL_CMD_WRITE_ATTRIB_RESP.
 typedef PACKED_STRUCT zcl_rec_write_attrib_status_t {
 	uint8_t	status;
 	uint16_t	id_le;
 } zcl_rec_write_attrib_status_t;
+PACKED_EPILOG
 
 
 // Configure Reporting Command (ZCL_CMD_CONFIGURE_REPORT)
@@ -460,6 +490,8 @@ typedef PACKED_STRUCT zcl_rec_write_attrib_status_t {
 // or RECEIVE.
 #define ZCL_DIRECTION_SEND		0x00		// attributes sent (or reported)
 #define ZCL_DIRECTION_RECEIVE	0x01		// attributes received
+
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_report_send_t {
 	uint8_t	direction;		// 0x00 (ZCL_DIRECTION_SEND)
 	uint16_t	attrib_id_le;
@@ -469,22 +501,28 @@ typedef PACKED_STRUCT zcl_rec_report_send_t {
 	         // Note:  If max_interval is 0xffff, device shall not issue reports
 	         // for the specified attribute.
 } zcl_rec_report_send_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_report_receive_t {
 	uint8_t	direction;		// 0x01 (ZCL_DIRECTION_RECEIVE)
 	uint16_t	attrib_id_le;
 	uint16_t	timeout_period_le;		// number of seconds, or 0 for no timeout
 } zcl_rec_report_receive_t;
+PACKED_EPILOG
 
 typedef union zcl_rec_report_t {
+	PACKED_PROLOG
 	PACKED_STRUCT {
 		uint8_t	direction;		// ZCL_DIRECTION_SEND or ZCL_DIRECTION_RECEIVE
 		uint16_t	attrib_id_le;
 	} common;
+	PACKED_EPILOG
 	zcl_rec_report_send_t		send;
 	zcl_rec_report_receive_t	receive;
 } zcl_rec_reporting_config_t;
 
+PACKED_PROLOG
 // Configure Reporting Response Command (ZCL_CMD_WRITE_REPORT_CFG_RESP)
 // payload is two bytes (ZCL_STATUS_SUCCESS followed by a direction) if all
 // writes were successful or 1 to n 4-byte Attribute Status Records for each
@@ -496,13 +534,16 @@ typedef PACKED_STRUCT zcl_rec_reporting_status_t {
 	uint8_t	direction;		// ZCL_DIRECTION_SEND or ZCL_DIRECTION_RECEIVE
 	uint16_t	attrib_id_le;
 } zcl_rec_reporting_status_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 // Read Reporting Configuration Command (ZCL_CMD_READ_REPORT_CFG)
 // payload is 1 to n 3-byte Attribute Records
 typedef PACKED_STRUCT zcl_rec_read_report_cfg_t {
 	uint8_t	direction;		// ZCL_DIRECTION_SEND or ZCL_DIRECTION_RECEIVE
 	uint16_t	attrib_id_le;
 } zcl_rec_read_report_cfg_t;
+PACKED_EPILOG
 
 // Read Reporting Configuration Response Command (ZCL_CMD_READ_REPORT_CFG_RESP)
 // payload is 1 to n variable-length records as follows:
@@ -512,6 +553,7 @@ typedef PACKED_STRUCT zcl_rec_read_report_cfg_t {
 //    record (if direction is ZCL_DIRECTION_SEND) or a zcl_rec_report_receive_t
 //    record (if direction is ZCL_DIRECTION_RECEIVE)
 /* combined typedef?
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_report_resp_t {
 	uint8_t	status;
 	union {
@@ -523,23 +565,30 @@ typedef PACKED_STRUCT zcl_rec_report_resp_t {
 		zcl_rec_report_receive_t	receive_cfg;
 	} u;
 } zcl_rec_report_resp_t;
+PACKED_EPILOG
 */
 
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_report_error_resp_t {
 	uint8_t	status;			// Set to anything except ZCL_STATUS_SUCCESS (0x00)
 	uint8_t	direction;
 	uint16_t	attrib_id_le;
 } zcl_rec_report_error_resp_t;
+PACKED_EPILOG
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_report_send_resp_t {
 	uint8_t							status;		// Set to ZCL_STATUS_SUCCESS (0x00)
 	zcl_rec_report_send_t		report_cfg;
 		// report_cfg.direction set to 0x00 (ZCL_DIRECTION_SEND)
 } zcl_rec_report_send_resp_t;
+PACKED_EPILOG
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_rec_report_receive_resp_t {
 	uint8_t							status;		// Set to ZCL_STATUS_SUCCESS (0x00)
 	zcl_rec_report_receive_t	report_cfg;
 		// report_cfg.direction set to 0x01 (ZCL_DIRECTION_RECEIVE)
 } zcl_rec_report_receive_resp_t;
+PACKED_EPILOG
 
 
 /*
@@ -572,23 +621,30 @@ typedef PACKED_STRUCT zcl_rec_report_receive_resp_t {
 
 // use zcl_attrib_t
 
+PACKED_PROLOG
 /// Used for #ZCL_CMD_DEFAULT_RESP.
 typedef PACKED_STRUCT zcl_default_response_t {
 	uint8_t	command;
 	uint8_t	status;
 } zcl_default_response_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Used for #ZCL_CMD_DISCOVER_ATTRIB.
 typedef PACKED_STRUCT zcl_discover_attrib_t {
 	uint16_t	start_attrib_id_le;
 	uint8_t	max_return_count;
 } zcl_discover_attrib_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Used for #ZCL_CMD_DISCOVER_ATTRIB_RESP.
 typedef PACKED_STRUCT zcl_rec_attrib_report_t {
 	uint16_t	id_le;
 	uint8_t	type;
 } zcl_rec_attrib_report_t;
+PACKED_EPILOG
+PACKED_PROLOG
 /// Used for #ZCL_CMD_DISCOVER_ATTRIB_RESP.
 typedef PACKED_STRUCT zcl_discover_attrib_resp_t {
 	/// Set to ZCL_BOOL_FALSE if there are more attributes than contained
@@ -596,7 +652,9 @@ typedef PACKED_STRUCT zcl_discover_attrib_resp_t {
 	uint8_t							discovery_complete;
 	zcl_rec_attrib_report_t		attrib[1];
 } zcl_discover_attrib_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 // Read Attributes Structured Command (ZCL_CMD_READ_STRUCT_ATTRIB)
 // payload is 1 to n variable-byte Attribute ID and Selector fields
 typedef PACKED_STRUCT zcl_selector_t {
@@ -610,12 +668,16 @@ typedef PACKED_STRUCT zcl_selector_t {
 		// indicator actions 0x30 to 0xF0 are reserved
 	uint16_t	index_le[15];
 } zcl_selector_t;
+PACKED_EPILOG
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_read_struct_attrib_t {
 	uint16_t			attrib_id_le;
 	zcl_selector_t	selector;
 } zcl_read_struct_attrib_t;
+PACKED_EPILOG
 
 
+PACKED_PROLOG
 // Write Attributes Structured Command (ZCL_CMD_WRITE_STRUCT_ATTRIB)
 // payload is 1 to n variable-length Write Structured Attribute Record fields.
 typedef PACKED_STRUCT zcl_rec_write_struct_attrib_t {
@@ -624,7 +686,9 @@ typedef PACKED_STRUCT zcl_rec_write_struct_attrib_t {
 	uint8_t			type;
 	uint8_t			value[1];		// variable length, depending on type
 } zcl_rec_write_struct_attrib_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 // Write Attributes Structured Response Cmd (ZCL_CMD_WRITE_STRUCT_ATTRIB_RESP)
 // payload is 1 to n variable-length Write Structure Attribute Status Record
 // fields.
@@ -633,6 +697,7 @@ typedef PACKED_STRUCT zcl_rec_write_struct_attrib_resp_t {
 	uint16_t			id;
 	zcl_selector_t	selector;
 } zcl_rec_write_struct_attrib_resp_t;
+PACKED_EPILOG
 
 
 

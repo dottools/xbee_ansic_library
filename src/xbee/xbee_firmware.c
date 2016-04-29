@@ -544,6 +544,7 @@ char FAR *xbee_fw_status_ebl( xbee_fw_source_t *source, char FAR *buffer)
 															// If ATVR=8042, OEM file contains
 															// 0x38 0x30 0x34 0x32.
 
+PACKED_PROLOG
 typedef PACKED_STRUCT _xbee_oem_header
 {
 	uint16_t			magic;					// 0x93 0xFD (XBEE_OEM_MAGIC_NUMBER)
@@ -555,6 +556,7 @@ typedef PACKED_STRUCT _xbee_oem_header
 	uint8_t			software_id;			// must match XBee's AT%C response
 	// header is followed by multi-byte version string (usually 4 bytes?)
 } xbee_oem_header_t;
+PACKED_EPILOG
 
 /*
 	char				version_str[4];		// must match ATVR response

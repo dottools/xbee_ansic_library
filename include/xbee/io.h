@@ -108,6 +108,7 @@ typedef struct xbee_io_t {
 //@}
 
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_frame_io_response_t {
 	uint8_t				frame_type;			///< XBEE_FRAME_IO_RESPONSE (0x92)
 	addr64				ieee_address_be;			///< ATSH and ATSL of sender
@@ -117,6 +118,7 @@ typedef PACKED_STRUCT xbee_frame_io_response_t {
    uint16_t				data[1];				///< First of variable amount of data
                                        ///< Parse using xbee_io_response_parse()
 } xbee_frame_io_response_t;
+PACKED_EPILOG
 
 /**
 	@brief Configuration type for XBee built-in I/Os.

@@ -191,6 +191,7 @@ extern const zcl_attribute_tree_t zcl_comm_startup_attribute_tree[];
 
 // Client-generated commands
 #define ZCL_COMM_CMD_RESTART_DEVICE					0x00
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_comm_restart_device_cmd_t
 {
 	uint8_t		options;
@@ -202,22 +203,28 @@ typedef PACKED_STRUCT zcl_comm_restart_device_cmd_t
 	uint8_t		delay;		// delay in seconds before restarting
 	uint8_t		jitter;		// add RAND(jitter * 80) ms to delay
 } zcl_comm_restart_device_cmd_t;
+PACKED_EPILOG
 
 #define ZCL_COMM_CMD_SAVE_STARTUP_PARAM			0x01
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_comm_save_startup_param_t
 {
 	uint8_t		options;
 	uint8_t		index;
 } zcl_comm_save_startup_param_t;
+PACKED_EPILOG
 
 #define ZCL_COMM_CMD_RESTORE_STARTUP_PARAM		0x02
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_comm_restore_startup_param_t
 {
 	uint8_t		options;
 	uint8_t		index;
 } zcl_comm_restore_startup_param_t;
+PACKED_EPILOG
 
 #define ZCL_COMM_CMD_RESET_STARTUP_PARAM			0x03
+PACKED_PROLOG
 typedef PACKED_STRUCT zcl_comm_reset_startup_param_t
 {
 	uint8_t		options;
@@ -226,6 +233,7 @@ typedef PACKED_STRUCT zcl_comm_reset_startup_param_t
 		#define ZCL_COMM_RESET_OPT_ERASE_INDEX		0x04
 	uint8_t		index;
 } zcl_comm_reset_startup_param_t;
+PACKED_EPILOG
 
 
 // Server-generated commands

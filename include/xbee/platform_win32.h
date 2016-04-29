@@ -28,16 +28,35 @@
 		// MinGW's length-limited case-insensitive string comparison has a
 		// slightly different name.
 		#define strncmpi strnicmp
+	#elif WIN32
+		// Load platform's endian header to learn whether we're big or little.
+		//#include <endian.h>	// Not available on VS 2013 so do manually:
+		#define LITTLE_ENDIAN	1234
+		#define BIG_ENDIAN		4321
+
+		#define BYTE_ORDER		LITTLE_ENDIAN
 	#else
 		#include <endian.h>
 	#endif
 
-	// macro used to declare a packed structure (no alignment of elements)
-	// "__gcc_struct__" added to fix problems with gcc 4.7.0 in MinGW/MSYS
-	#define PACKED_STRUCT	struct __attribute__ ((__packed__, __gcc_struct__))
+
+	#ifdef _MSC_VER
+		// alternative macros for packed structures for Visual Studio compiler.
+		#define PACKED_STRUCT struct
+		#define PACKED_PROLOG __pragma(pack(1))
+		#define PACKED_EPILOG __pragma(pack())
+	#elif defined(__GNUC__)
+		// macro used to declare a packed structure (no alignment of elements)
+		// "__gcc_struct__" added to fix problems with gcc 4.7.0 in MinGW/MSYS
+		#define PACKED_STRUCT	struct __attribute__ ((__packed__, __gcc_struct__))
+	#endif
 
 	#define _f_memcpy		memcpy
 	#define _f_memset		memset
+
+	#if defined(_MSC_VER) && (_MSC_VER < 1900)
+		#define snprintf _snprintf
+	#endif
 
 	// stdint.h for int8_t, uint8_t, int16_t, etc. types
 	#include <stdint.h>

@@ -234,6 +234,7 @@ typedef struct xbee_cmd_request {
 	xbee_at_cmd_t				command;
 } xbee_cmd_request_t;
 
+PACKED_PROLOG
 /// Header for AT Commands sent to the local (serially-attached) XBee.
 typedef PACKED_STRUCT xbee_header_local_at_req {
 	/// #XBEE_FRAME_LOCAL_AT_CMD (0x08) or #XBEE_FRAME_LOCAL_AT_CMD_Q (0x09)
@@ -245,7 +246,9 @@ typedef PACKED_STRUCT xbee_header_local_at_req {
 	/// two-character AT Command
 	xbee_at_cmd_t		command;
 } xbee_header_local_at_req_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Header to AT Commands sent to a remote XBee on the network.
 typedef PACKED_STRUCT xbee_header_remote_at_req {
 	/// #XBEE_FRAME_REMOTE_AT_CMD (0x17)
@@ -275,6 +278,7 @@ typedef PACKED_STRUCT xbee_header_remote_at_req {
 		//@}
 	xbee_at_cmd_t		command;
 } xbee_header_remote_at_req_t;
+PACKED_EPILOG
 
 
 /// Useful typedef to create either a local or remote request frame.
@@ -314,6 +318,7 @@ enum xbee_at_resp_status {
 #endif
 
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_header_local_at_resp {
    /// #XBEE_FRAME_LOCAL_AT_RESPONSE (0x88)
 	uint8_t				frame_type;
@@ -328,7 +333,9 @@ typedef PACKED_STRUCT xbee_header_local_at_resp {
 	uint8_t				status;
 
 } xbee_header_local_at_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_header_remote_at_resp {
    /// #XBEE_FRAME_REMOTE_AT_RESPONSE (0x97)
 	uint8_t				frame_type;
@@ -350,8 +357,10 @@ typedef PACKED_STRUCT xbee_header_remote_at_resp {
 	/// comparing this field to the xbee_at_resp_status enum.
 	uint8_t				status;
 } xbee_header_remote_at_resp_t;
+PACKED_EPILOG
 
 
+PACKED_PROLOG
 /// Response to an AT Command sent to the local serially-connected XBee.
 typedef PACKED_STRUCT xbee_frame_local_at_resp {
 
@@ -359,7 +368,9 @@ typedef PACKED_STRUCT xbee_frame_local_at_resp {
 	/// First byte of multi-byte value.
 	uint8_t				value[1];
 } xbee_frame_local_at_resp_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 /// Response to an AT Command sent to a remote XBee.
 typedef PACKED_STRUCT xbee_frame_remote_at_resp {
    xbee_header_remote_at_resp_t header;
@@ -367,6 +378,7 @@ typedef PACKED_STRUCT xbee_frame_remote_at_resp {
 	/// First byte of multi-byte value.
 	uint8_t				value[1];
 } xbee_frame_remote_at_resp_t;
+PACKED_EPILOG
 
 /// Useful typedef for casting either a local or remote response frame.
 typedef union xbee_frame_at_response {

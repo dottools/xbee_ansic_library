@@ -271,11 +271,13 @@ int xbee_found( wpan_conversation_t FAR *conversation,
 		ZCL_CLUST_BASIC,
 		attributes
 	};
+	PACKED_PROLOG
 	const PACKED_STRUCT {
 		uint8_t									transaction;
 		zdo_match_desc_rsp_header_t		header;
 		uint8_t									endpoints[80];
 	} FAR *match_response;
+	PACKED_EPILOG
 
 	wpan_envelope_t reply_envelope;
 

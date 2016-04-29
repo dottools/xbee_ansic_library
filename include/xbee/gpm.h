@@ -25,6 +25,7 @@
 
 #define DIGI_CLUST_MEMORY_ACCESS		0x23
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_gpm_request_header_t {
 	uint8_t	cmd_id;				//< one of GPM_CMD_*
 	uint8_t	options;				//< varies by command
@@ -33,7 +34,9 @@ typedef PACKED_STRUCT xbee_gpm_request_header_t {
 	/// number of bytes in the data field (WRITE) or requested for a READ.
 	uint16_t	byte_count_be;
 } xbee_gpm_request_header_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_gpm_response_header_t {
 	uint8_t	cmd_id;				//< one of GPM_CMD_*, same as cmd_id in request
 	uint8_t	status;				//< indication whether command was successful
@@ -41,7 +44,9 @@ typedef PACKED_STRUCT xbee_gpm_response_header_t {
 	uint16_t	start_index_be;	//< byte index within the addressed GPM block
 	uint16_t	byte_count_be;		//< number of bytes in the data field
 } xbee_gpm_response_header_t;
+PACKED_EPILOG
 
+PACKED_PROLOG
 typedef PACKED_STRUCT xbee_gpm_frame_t {
 	union {
 		xbee_gpm_request_header_t		request;
@@ -49,6 +54,7 @@ typedef PACKED_STRUCT xbee_gpm_frame_t {
 	} header;
 	uint8_t	data[1];				//< variable-length data field
 } xbee_gpm_frame_t;
+PACKED_EPILOG
 
 /// Number of bytes out of the RF payload used by the GPM headers.  When
 /// reading or writing to the GPM, note that the byte count for the data bytes
